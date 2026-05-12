@@ -118,7 +118,7 @@ export default function ProductDetail() {
                 <button
                   key={idx}
                   onClick={() => setSelectedImage(idx)}
-                  className={`relative flex-shrink-0 w-20 h-20 lg:w-24 lg:h-24 rounded-lg overflow-hidden bg-secondary transition-all ${
+                  className={`relative flex-shrink-0 w-20 h-20 lg:w-24 lg:h-24 rounded-xl overflow-hidden bg-secondary transition-all ${
                     selectedImage === idx ? "ring-2 ring-primary ring-offset-2" : "opacity-70 hover:opacity-100"
                   }`}
                 >
@@ -141,7 +141,7 @@ export default function ProductDetail() {
               />
               {!product.inStock && (
                 <div className="absolute top-6 left-6">
-                  <span className="inline-flex items-center rounded-sm bg-destructive/10 px-3 py-1 text-sm font-medium text-destructive">
+                  <span className="inline-flex items-center rounded-lg bg-destructive/10 px-3 py-1 text-sm font-medium text-destructive">
                     Out of Stock
                   </span>
                 </div>
@@ -183,11 +183,11 @@ export default function ProductDetail() {
             <Separator className="mb-8" />
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <div className="flex items-center border rounded-md w-32 h-14 bg-background">
+              <div className="flex items-center border rounded-xl w-32 h-14 bg-background overflow-hidden">
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="h-full px-3 rounded-none" 
+                  className="h-full px-3 rounded-none hover:bg-secondary/50" 
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   disabled={quantity <= 1}
                 >
@@ -197,7 +197,7 @@ export default function ProductDetail() {
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="h-full px-3 rounded-none"
+                  className="h-full px-3 rounded-none hover:bg-secondary/50"
                   onClick={() => setQuantity(quantity + 1)}
                 >
                   <Plus className="h-4 w-4" />

@@ -80,7 +80,7 @@ export function ProductCard({ product }: { product: Product }) {
       transition={{ duration: 0.5 }}
       className="group relative flex flex-col gap-4"
     >
-      <div className="relative aspect-square overflow-hidden rounded-md bg-secondary/30">
+      <div className="relative aspect-square overflow-hidden rounded-2xl bg-secondary/30">
         <Link href={`/product/${product.id}`} className="absolute inset-0 z-10" data-testid={`link-product-${product.id}`} />
         <img 
           src={product.imageUrl} 

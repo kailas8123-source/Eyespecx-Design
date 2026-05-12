@@ -114,9 +114,9 @@ export default function Cart() {
                 </div>
                 
                 <div className="flex justify-between items-end mt-6">
-                  <div className="flex items-center border rounded-md h-10 bg-background">
+                  <div className="flex items-center border rounded-xl h-10 bg-background overflow-hidden">
                     <button 
-                      className="px-3 h-full flex items-center justify-center hover:bg-secondary/50 rounded-l-md transition-colors"
+                      className="px-3 h-full flex items-center justify-center hover:bg-secondary/50 transition-colors"
                       onClick={() => updateCartItem.mutate({ id: item.id, data: { quantity: Math.max(1, item.quantity - 1) } })}
                       disabled={updateCartItem.isPending}
                     >
@@ -124,7 +124,7 @@ export default function Cart() {
                     </button>
                     <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                     <button 
-                      className="px-3 h-full flex items-center justify-center hover:bg-secondary/50 rounded-r-md transition-colors"
+                      className="px-3 h-full flex items-center justify-center hover:bg-secondary/50 transition-colors"
                       onClick={() => updateCartItem.mutate({ id: item.id, data: { quantity: item.quantity + 1 } })}
                       disabled={updateCartItem.isPending}
                     >
