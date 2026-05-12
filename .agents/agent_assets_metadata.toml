@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "6En8Q5tqvlWHpT2oNiMfJ"
+uri = "file://artifacts/eyespecx/public/images/hero.png"
+type = "image"
+title = "Editorial model wearing titanium glasses"
+
+[[generated]]
+id = "lVVHOFPPMwPmowvitugiD"
+uri = "file://artifacts/eyespecx/public/images/collection-1.png"
+type = "image"
+title = "Acetate glasses on marble block"
+
+[[generated]]
+id = "QhA8hdrU75dFAeE2mGkr0"
+uri = "file://artifacts/eyespecx/public/images/collection-2.png"
+type = "image"
+title = "Tortoiseshell sunglasses with shadows"
