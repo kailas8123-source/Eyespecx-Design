@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import logoSrc from "@assets/eyespecx_monochrome_1778592585976.png";
+
+const logoSrc = "/logo.png";
 
 export function SplashScreen() {
   const [visible, setVisible] = useState(true);

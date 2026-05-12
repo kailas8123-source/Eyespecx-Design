@@ -1,7 +1,8 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import logoSrc from "@assets/eyespecx_monochrome_1778592585976.png";
 import { Instagram, Youtube, Twitter } from "lucide-react";
+
+const logoSrc = "/logo.png";
 
 export function Footer() {
   return (

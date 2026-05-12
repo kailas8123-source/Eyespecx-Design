@@ -3,7 +3,8 @@ import { useGetCart, useGetWishlist } from "@workspace/api-client-react";
 import { ShoppingBag, Heart, Menu, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import logoSrc from "@assets/eyespecx_monochrome_1778592585976.png";
+
+const logoSrc = "/logo.png";
 
 export function Navbar() {
   const [location] = useLocation();
