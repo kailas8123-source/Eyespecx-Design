@@ -3,6 +3,7 @@ import { useGetCart, useGetWishlist } from "@workspace/api-client-react";
 import { ShoppingBag, Heart, Menu, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import logoSrc from "@assets/eyespecx_monochrome_1778592585976.png";
 
 export function Navbar() {
   const [location] = useLocation();
@@ -31,7 +32,9 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="left" className="w-[300px] sm:w-[400px]">
               <div className="flex flex-col gap-6 py-6">
-                <Link href="/" className="text-xl font-serif font-bold tracking-tight">Eyespecx</Link>
+                <Link href="/">
+                  <img src={logoSrc} alt="Eyespecx" className="h-10 brightness-0" />
+                </Link>
                 <div className="flex flex-col gap-4">
                   {links.map((link) => (
                     <Link key={link.href} href={link.href} className="text-lg font-medium">
@@ -44,16 +47,20 @@ export function Navbar() {
               </div>
             </SheetContent>
           </Sheet>
-          
-          <Link href="/" className="text-2xl font-serif font-bold tracking-tighter" data-testid="link-home-logo">
-            Eyespecx
+
+          <Link href="/" className="flex items-center" data-testid="link-home-logo">
+            <img
+              src={logoSrc}
+              alt="Eyespecx"
+              className="h-9 w-auto brightness-0"
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-6 ml-6">
             {links.map((link) => (
-              <Link 
-                key={link.href} 
-                href={link.href} 
+              <Link
+                key={link.href}
+                href={link.href}
                 className={`text-sm font-medium transition-colors hover:text-primary ${location === link.href ? "text-primary" : "text-muted-foreground"}`}
               >
                 {link.label}
@@ -83,7 +90,7 @@ export function Navbar() {
             )}
           </Link>
           <Link href="/orders" className="hidden sm:flex group p-2" data-testid="link-orders">
-             <User className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+            <User className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
           </Link>
         </div>
       </div>
