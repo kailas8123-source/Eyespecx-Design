@@ -35,6 +35,7 @@ export default function Shop() {
   const categoryParam = searchParams.get("category") || undefined;
   const genderParam = searchParams.get("gender") || undefined;
   const qParam = searchParams.get("search") || undefined;
+  const shapeParam = searchParams.get("shape") || undefined;
   const sortParam = searchParams.get("sort") || undefined;
 
   const [searchQuery, setSearchQuery] = useState(qParam || "");
@@ -43,6 +44,7 @@ export default function Shop() {
     category: categoryParam,
     gender: genderParam,
     search: qParam,
+    shape: shapeParam,
     sort: sortParam,
   });
 
@@ -74,7 +76,8 @@ export default function Shop() {
     setSearchQuery("");
   };
 
-  const hasFilters = categoryParam || genderParam || qParam || sortParam;
+  const shapeFilters = ["Square", "Round", "Cat Eye", "Aviator", "Rectangle", "Browline"];
+  const hasFilters = categoryParam || genderParam || qParam || shapeParam || sortParam;
 
   return (
     <div className="min-h-screen bg-background pt-8 pb-24">
@@ -82,7 +85,7 @@ export default function Shop() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
           <div>
             <h1 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-3">
-              {genderParam === "men" ? "Men's Eyewear" : genderParam === "women" ? "Women's Eyewear" : categoryParam ? "Collection" : "All Eyewear"}
+              {genderParam === "men" ? "Men's Eyewear" : genderParam === "women" ? "Women's Eyewear" : shapeParam ? `${shapeParam} Frames` : categoryParam ? "Collection" : "All Eyewear"}
             </h1>
             <p className="text-muted-foreground max-w-xl text-lg">
               Explore our complete collection of premium frames. Discover the perfect shape, material, and fit for your face.
@@ -155,6 +158,21 @@ export default function Shop() {
                             onClick={() => updateParam("category", categoryParam === c.slug ? null : c.slug)}
                           >
                             {c.name}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="font-medium">Frame Shape</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {shapeFilters.map((shape) => (
+                          <Button
+                            key={shape}
+                            variant={shapeParam === shape ? "default" : "outline"}
+                            onClick={() => updateParam("shape", shapeParam === shape ? null : shape)}
+                          >
+                            {shape}
                           </Button>
                         ))}
                       </div>

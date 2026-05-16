@@ -1,5 +1,22 @@
 import { Link } from "wouter";
-import { ArrowRight, Play, ExternalLink } from "lucide-react";
+import {
+  ArrowRight,
+  BadgePercent,
+  ExternalLink,
+  Glasses,
+  Headphones,
+  MapPin,
+  MessageCircle,
+  Play,
+  RotateCcw,
+  Ruler,
+  ShieldCheck,
+  Sparkles,
+  Truck,
+  Upload,
+  Video,
+  type LucideIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/product/ProductCard";
 import {
@@ -131,6 +148,95 @@ const BRANDS = [
   },
 ];
 
+const COMMERCE_SERVICES: Array<{
+  title: string;
+  copy: string;
+  action: string;
+  href: string;
+  icon: LucideIcon;
+}> = [
+  {
+    title: "Free eye test",
+    copy: "Book a trained optometrist slot before choosing your lens package.",
+    action: "Book now",
+    href: "#eye-test",
+    icon: MapPin,
+  },
+  {
+    title: "3D try-on",
+    copy: "Shortlist shapes by face fit, bridge width, and everyday comfort.",
+    action: "Try frames",
+    href: "/shop",
+    icon: Video,
+  },
+  {
+    title: "Order on WhatsApp",
+    copy: "Share a prescription, get frame suggestions, and complete the order with help.",
+    action: "Chat",
+    href: "https://wa.me/919000000000",
+    icon: MessageCircle,
+  },
+  {
+    title: "Ask an optician",
+    copy: "Compare coatings, indexes, and frame sizes before you add to bag.",
+    action: "Get help",
+    href: "/shop?search=optical",
+    icon: Headphones,
+  },
+];
+
+const SHAPE_GUIDES = [
+  {
+    shape: "Square",
+    copy: "Crisp lines for round and oval faces.",
+    href: "/shop?shape=Square",
+    image: "/images/collection-1.png",
+  },
+  {
+    shape: "Round",
+    copy: "Soft balance for angular features.",
+    href: "/shop?shape=Round",
+    image: "/images/collection-2.png",
+  },
+  {
+    shape: "Cat Eye",
+    copy: "Lifted corners with a sharper fashion edge.",
+    href: "/shop?shape=Cat+Eye",
+    image: "/images/collection-2.png",
+  },
+  {
+    shape: "Aviator",
+    copy: "A relaxed sun shape with broad coverage.",
+    href: "/shop?shape=Aviator",
+    image: "/images/hero.png",
+  },
+];
+
+const LENS_PACKAGES = [
+  {
+    title: "Single vision",
+    price: "from $49",
+    copy: "Everyday prescription lenses with anti-glare coating.",
+  },
+  {
+    title: "Blue block",
+    price: "from $69",
+    copy: "Screen comfort for work, study, and late-night scrolling.",
+  },
+  {
+    title: "Progressive",
+    price: "from $129",
+    copy: "Distance, mid, and reading support in one refined lens.",
+  },
+];
+
+const PROMISES = [
+  { title: "1-year warranty", copy: "Manufacturing defects covered.", icon: ShieldCheck },
+  { title: "Free shipping", copy: "Complimentary delivery on orders over $150.", icon: Truck },
+  { title: "Easy returns", copy: "30-day return window on eligible frames.", icon: RotateCcw },
+  { title: "Precision fitting", copy: "Size, bridge, and lens guidance included.", icon: Ruler },
+];
+
 function TutorialCard({ video, index }: { video: typeof TUTORIAL_VIDEOS[0]; index: number }) {
   const [playing, setPlaying] = useState(false);
 
@@ -235,6 +341,148 @@ function ReelCard({ reel, index }: { reel: typeof INSTAGRAM_REELS[0]; index: num
   );
 }
 
+function ServiceTile({ service, index }: { service: typeof COMMERCE_SERVICES[0]; index: number }) {
+  const Icon = service.icon;
+  const isExternal = service.href.startsWith("http");
+
+  const content = (
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: index * 0.06 }}
+      className="group h-full rounded-lg border border-border/60 bg-background p-5 transition-colors hover:border-primary/30 hover:bg-secondary/30"
+      data-testid={`service-tile-${index}`}
+    >
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg bg-foreground text-background">
+        <Icon className="h-5 w-5" />
+      </div>
+      <h3 className="text-base font-semibold">{service.title}</h3>
+      <p className="mt-2 min-h-[48px] text-sm leading-relaxed text-muted-foreground">{service.copy}</p>
+      <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary">
+        {service.action} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+      </span>
+    </motion.div>
+  );
+
+  if (isExternal) {
+    return (
+      <a href={service.href} target="_blank" rel="noopener noreferrer" className="block h-full">
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={service.href} className="block h-full">
+      {content}
+    </Link>
+  );
+}
+
+function ShapeCard({ item, index }: { item: typeof SHAPE_GUIDES[0]; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: index * 0.06 }}
+    >
+      <Link
+        href={item.href}
+        className="group block overflow-hidden rounded-lg border border-border/60 bg-card"
+        data-testid={`shape-card-${item.shape.toLowerCase().replaceAll(" ", "-")}`}
+      >
+        <div className="aspect-[4/3] overflow-hidden bg-secondary">
+          <img
+            src={item.image}
+            alt={`${item.shape} eyewear`}
+            className="h-full w-full object-cover mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+        <div className="p-5">
+          <h3 className="text-lg font-semibold">{item.shape}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">{item.copy}</p>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+function LensPackageSection() {
+  return (
+    <section className="bg-background py-20" data-testid="section-lens-packages">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+          <div className="rounded-lg bg-foreground p-6 text-background md:p-8">
+            <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-lg bg-white text-black">
+              <Upload className="h-5 w-5" />
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/50">Prescription ready</p>
+            <h2 className="mt-3 text-3xl font-serif font-bold tracking-tight md:text-4xl">
+              Add the right lens to every frame.
+            </h2>
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/65 md:text-base">
+              Upload a prescription after checkout or choose assisted buying and let an Eyespecx optician confirm the right index, coating, and fit.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button asChild size="lg" className="bg-white text-black hover:bg-white/90">
+                <Link href="/shop">Shop frames</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-black">
+                <a href="https://wa.me/919000000000" target="_blank" rel="noopener noreferrer">Send prescription</a>
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {LENS_PACKAGES.map((pkg, index) => (
+              <motion.div
+                key={pkg.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.06 }}
+                className="rounded-lg border border-border/60 bg-card p-5"
+              >
+                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
+                  {index === 0 ? <Glasses className="h-5 w-5" /> : index === 1 ? <Sparkles className="h-5 w-5" /> : <BadgePercent className="h-5 w-5" />}
+                </div>
+                <p className="text-sm font-semibold text-primary">{pkg.price}</p>
+                <h3 className="mt-2 text-lg font-semibold">{pkg.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pkg.copy}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PromisesBand() {
+  return (
+    <section className="border-y bg-secondary/20 py-8" data-testid="section-promises">
+      <div className="container mx-auto grid grid-cols-1 gap-4 px-4 md:grid-cols-4 md:px-6">
+        {PROMISES.map((promise) => {
+          const Icon = promise.icon;
+          return (
+            <div key={promise.title} className="flex items-start gap-3 py-2">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-background">
+                <Icon className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold">{promise.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{promise.copy}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const { data: featuredProducts, isLoading: isLoadingFeatured } = useGetFeaturedProducts();
   const { data: newArrivals } = useGetNewArrivals();
@@ -276,6 +524,28 @@ export default function Home() {
               </Button>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="border-b bg-background py-12" data-testid="section-commerce-services">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="mb-8 flex flex-col justify-between gap-3 md:flex-row md:items-end">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">Store services</p>
+              <h2 className="mt-2 text-2xl font-serif font-bold tracking-tight md:text-3xl">
+                Buy online with optician support.
+              </h2>
+            </div>
+            <Link href="/shop" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
+              Start shopping <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {COMMERCE_SERVICES.map((service, index) => (
+              <ServiceTile key={service.title} service={service} index={index} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -321,6 +591,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Shape Finder */}
+      <section className="bg-secondary/20 py-20" data-testid="section-shape-finder">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="mb-10 flex flex-col justify-between gap-3 md:flex-row md:items-end">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">Face fit</p>
+              <h2 className="mt-2 text-3xl font-serif font-bold tracking-tight md:text-4xl">
+                Shop by frame shape.
+              </h2>
+            </div>
+            <Link href="/shop" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
+              View all shapes <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {SHAPE_GUIDES.map((item, index) => (
+              <ShapeCard key={item.shape} item={item} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Featured Products */}
       <section className="py-20 bg-secondary/20">
         <div className="container mx-auto px-4 md:px-6">
@@ -343,6 +635,8 @@ export default function Home() {
           )}
         </div>
       </section>
+
+      <LensPackageSection />
 
       {/* ── TUTORIAL VIDEOS ── */}
       <section className="py-24 bg-background" data-testid="section-tutorials">
@@ -527,6 +821,8 @@ export default function Home() {
           )}
         </div>
       </section>
+
+      <PromisesBand />
     </div>
   );
 }

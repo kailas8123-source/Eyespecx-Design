@@ -358,6 +358,7 @@ export type ListProductsParams = {
   category?: string;
   gender?: string;
   search?: string;
+  shape?: string;
   sort?: string;
 };
 
@@ -379,6 +380,9 @@ export function useListProducts(params: ListProductsParams = {}, config?: QueryC
         result = result.filter(
           (product) => product.gender === params.gender || product.gender === "unisex",
         );
+      }
+      if (params.shape) {
+        result = result.filter((product) => product.shape?.toLowerCase() === params.shape?.toLowerCase());
       }
       if (params.search) {
         const search = params.search.toLowerCase();
