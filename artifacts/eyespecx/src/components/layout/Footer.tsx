@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Instagram, Youtube, Twitter } from "lucide-react";
 
-const logoSrc = "/logo.png";
+const logoSrc = "/eyespecx-logo-dark.png";
 
 export function Footer() {
   return (
@@ -48,7 +48,7 @@ export function Footer() {
             transition={{ duration: 0.7 }}
             className="flex flex-col items-center text-center mb-14"
           >
-            <img src={logoSrc} alt="Eyespecx" className="h-16 mb-5" style={{ filter: "brightness(0) invert(1)" }} />
+            <img src={logoSrc} alt="Eyespecx" className="h-16 mb-5" />
             <p className="text-white/40 text-xs tracking-[0.3em] uppercase font-medium mb-6">
               An Exclusive Optics Showroom
             </p>

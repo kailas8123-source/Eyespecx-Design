@@ -4,7 +4,7 @@ import { ShoppingBag, Heart, Menu, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-const logoSrc = "/logo.png";
+const logoSrc = "/eyespecx-logo-light.png";
 
 export function Navbar() {
   const [location] = useLocation();
@@ -34,7 +34,7 @@ export function Navbar() {
             <SheetContent side="left" className="w-[300px] sm:w-[400px]">
               <div className="flex flex-col gap-6 py-6">
                 <Link href="/">
-                  <img src={logoSrc} alt="Eyespecx" className="h-10 brightness-0" />
+                  <img src={logoSrc} alt="Eyespecx" className="h-10 w-auto" />
                 </Link>
                 <div className="flex flex-col gap-4">
                   {links.map((link) => (
@@ -53,7 +53,7 @@ export function Navbar() {
             <img
               src={logoSrc}
               alt="Eyespecx"
-              className="h-9 w-auto brightness-0"
+              className="h-9 w-auto"
             />
           </Link>
 
